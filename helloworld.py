@@ -1,1 +1,1 @@
-print("Hello World Jenkins - schedule test")
+print("Hello World Jenkins - pipeline test")
