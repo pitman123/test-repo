@@ -1,10 +1,10 @@
 pipeline {
-    agent none // This specifies that the pipeline will not use any pre-configured agent
+    agent none // This specifies that the pipeline will not use any pre-configured agent globally
 
     stages {
         stage('Build') {
             agent {
-                docker {
+                dockerContainer {
                     image 'python:3.9' // Using the official Python image from Docker Hub
                     args '-u root' // Run as root if necessary (not recommended for production)
                 }
