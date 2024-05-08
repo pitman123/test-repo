@@ -1,34 +1,19 @@
 pipeline {
-    agent { 
-        node {
-            label 'docker-agent-python'
-            }
-      }
-    triggers {
-        pollSCM '* * * * *'
-    }
+    agent none // This specifies that the pipeline will not use any pre-configured agent
+
     stages {
         stage('Build') {
-            steps {
-                echo "Building.."
-                sh '''
-                '''
+            agent {
+                docker {
+                    image 'python:3.9' // Using the official Python image from Docker Hub
+                    args '-u root' // Run as root if necessary (not recommended for production)
+                }
             }
-        }
-        stage('Test') {
             steps {
-                echo "Testing.."
-                sh '''
-                python3 helloworld.py
-                '''
-            }
-        }
-        stage('Deliver') {
-            steps {
-                echo 'Deliver....'
-                sh '''
-                echo "doing delivery stuff.."
-                '''
+                // Execute Python commands or scripts
+                sh 'python --version'
+                sh 'pip install -r requirements.txt'
+                sh 'python my_script.py'
             }
         }
     }
