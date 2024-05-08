@@ -6,7 +6,7 @@ pipeline {
             agent {
                 dockerContainer {
                     image 'python:3.9' // Using the official Python image from Docker Hub
-                    args '-u root' // Run as root if necessary (not recommended for production)
+                    // Ensure other necessary options are set if required
                 }
             }
             steps {
