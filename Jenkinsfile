@@ -6,25 +6,25 @@ node {
                                         '-e POSTGRES_USER=myapp_user ' +
                                         '-e POSTGRES_PASSWORD=myapp_password ' +
                                         '-p 5432:5432') { postgresContainer ->
+        
         /* Wait until the PostgreSQL service is ready to accept connections */
-        sh 'while ! pg_isready -h localhost -p 5432; do sleep 1; done'
+        sh "while ! docker exec ${postgresContainer.id} pg_isready -h localhost -p 5432; do sleep 1; done"
 
-        // Launch the main Ruby container
-        docker.image('ruby:3.2.2').inside {
+        // Launch the main Ruby container linked to the PostgreSQL container
+        docker.image('ruby:3.2.2').inside("--link ${postgresContainer.id}:db") {
             sh 'ruby -v'
-
             
             /* Install dependencies, for example, using Bundler */
             //sh 'bundle install'
             
             /* Set the environment variable to connect to the database */
-            sh 'export DATABASE_URL=postgres://myapp_user:myapp_password@localhost:5432/myapp_db'
+             sh 'export DATABASE_URL=postgres://myapp_user:myapp_password@db:5432/myapp_db'
             
             /* Run database migrations or other operations */
-            // sh 'bundle exec rake db:migrate'
+           // sh 'bundle exec rake db:migrate'
             
             /* Execute tests */
-            // sh 'bundle exec rake test'
+           // sh 'bundle exec rake test'
         }
     }
 }
