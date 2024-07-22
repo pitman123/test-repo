@@ -7,8 +7,15 @@ jobs:
     runs-on: macos-14
     steps:
       - name: Install Docker
-        run: brew install docker
-      - name: Test Docker
+        run: |-
+          # Install Docker
+          brew install docker
+          # Docker on macOS misses daemon due to licensing, so install colima as runtime
+          brew install colima
+          # Start the daemon
+          colima start
+      -
+        name: Build Docker image
         run: docker info
         
       #- name: Print Hello World
