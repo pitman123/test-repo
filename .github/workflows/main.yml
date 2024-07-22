@@ -7,9 +7,7 @@ jobs:
     runs-on: macos-14
     steps:
       - name: Print Hello World
-        run: wget https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64
-      - name: test
-        run: ls -la 
+        run: wget https://desktop.docker.com/mac/main/arm64/157355/Docker.dmg
       - name: v1
         run: hdiutil attach Docker.dmg
       - name: v2
