@@ -6,13 +6,15 @@ jobs:
   hello-world:
     runs-on: macos-14
     steps:
-      - name: Print Hello World
-        run: wget https://desktop.docker.com/mac/main/arm64/157355/Docker.dmg
-      - name: v1
-        run: hdiutil attach Docker.dmg
-      - name: v2
-        run:  /Volumes/Docker/Docker.app/Contents/MacOS/install
-      - name: v3
-        run: hdiutil detach /Volumes/Docker
-      - name: docker test
-        run: docker info
+      - name: Install Docker
+        run: brew install docker
+      #- name: Print Hello World
+      #  run: wget https://desktop.docker.com/mac/main/arm64/157355/Docker.dmg
+      #- name: v1
+      #  run: hdiutil attach Docker.dmg
+      #- name: v2
+      #  run:  /Volumes/Docker/Docker.app/Contents/MacOS/install
+      #- name: v3
+      #  run: hdiutil detach /Volumes/Docker
+      #- name: docker test
+      #  run: docker info
