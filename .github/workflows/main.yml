@@ -8,6 +8,9 @@ jobs:
     steps:
       - name: Install Docker
         run: brew install docker
+      - name: Test Docker
+        run: docker info
+        
       #- name: Print Hello World
       #  run: wget https://desktop.docker.com/mac/main/arm64/157355/Docker.dmg
       #- name: v1
